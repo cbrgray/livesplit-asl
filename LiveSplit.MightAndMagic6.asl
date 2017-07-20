@@ -11,8 +11,8 @@ startup
 	refreshRate = 24;
 	
 	vars.StartTicks = (ulong)0;
-	vars.RedMask = (byte)255;
-	vars.PurpleMask = (byte)255;
+	vars.RedMask = byte.MaxValue;
+	vars.PurpleMask = byte.MaxValue;
 	vars.MapFileNames = new List<string> { "d02.blv", "d19.blv", "outb2.odm", "outd2.odm", "cd1.blv", "cd2.blv", "outd3.odm", "cd3.blv", "d20.blv", "sci-fi.blv", "d11.blv", "zdwj02.blv", "zddb01.blv", "outb3.odm", "d06.blv", "d10.blv", "oute1.odm", "outc2.odm", "sewer.blv", "outc1.odm", "d18.blv", "d01.blv", "d04.blv", "outa3.odm", "d15.blv", "outb1.odm", "d17.blv", "outc3.odm", "oute2.odm", "oute3.odm", "znwc.blv", "oracle.blv", "outa2.odm", "d08.blv", "d03.blv", "outd1.odm", "d07.blv", "d12.blv", "d05.blv", "d09.blv", "t7.blv", "t6.blv", "outa1.odm", "t1.blv", "t2.blv", "t5.blv", "t8.blv", "t4.blv", "t3.blv", "zarena.blv", "hive.blv", "d13.blv", "d14.blv", "pyramid.blv", "d16.blv" };
 	
 	settings.Add("council_quests", true, "Council Quests");
@@ -23,19 +23,19 @@ startup
 	settings.SetToolTip("maps", "Activated when leaving a specific map");
 	
 	settings.CurrentDefaultParent = "council_quests";
-	settings.Add("capped_prince", true, "Captured the Prince of Thieves"); 	  // 4
-	settings.Add("outpost_destroyed", true, "Destroyed the Devils Post"); 	  // 8
-	settings.Add("ended_winter", true, "Ended Winter"); 					  // 1
-	settings.Add("stable_prices", true, "Fixed the Stable Prices"); 		  // 2
-	settings.Add("kilburns_shield", true, "Retrieved Lord Kilburns Shield");  // 32
-	settings.Add("hourglass", true, "Retrieved the Hourglass of Time"); 	  // 16
+	settings.Add("capped_prince", true, "Captured the Prince of Thieves");
+	settings.Add("outpost_destroyed", true, "Destroyed the Devils Post");
+	settings.Add("ended_winter", true, "Ended Winter");
+	settings.Add("stable_prices", true, "Fixed the Stable Prices");
+	settings.Add("kilburns_shield", true, "Retrieved Lord Kilburns Shield");
+	settings.Add("hourglass", true, "Retrieved the Hourglass of Time");
 	
 	settings.CurrentDefaultParent = "primary_quests";
-	settings.Add("oracle", true, "Awakened the Oracle"); 							// 64
-	settings.Add("saved_enroth", true, "Destroyed the Hive and Saved Enroth"); 	 	// 8
-	settings.Add("silvertongue", true, "Exposed the Traitor on the High Council");  // 128
-	settings.Add("archibald", true, "Freed Archibald"); 							// 16
-	settings.Add("access_control", true, "Gained Access to the Control Center"); 	// 32
+	settings.Add("oracle", true, "Awakened the Oracle");
+	settings.Add("saved_enroth", true, "Destroyed the Hive and Saved Enroth");
+	settings.Add("silvertongue", true, "Exposed the Traitor on the High Council");
+	settings.Add("archibald", true, "Freed Archibald");
+	settings.Add("access_control", true, "Gained Access to the Control Center");
 	
 	settings.CurrentDefaultParent = "maps";
 	settings.Add("d02.blv", false, "Abandoned Temple");
@@ -139,9 +139,7 @@ split
 
 gameTime
 {
-	var ticks = current.GameTime - vars.StartTicks;
-	//  minutes = ticks / 256;
-	var seconds = ticks * 0.234375;
+	var seconds = (current.GameTime - vars.StartTicks) * 0.234375;
 	return TimeSpan.FromSeconds(seconds);
 }
 
