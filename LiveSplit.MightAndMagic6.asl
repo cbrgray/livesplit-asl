@@ -128,8 +128,13 @@ start
 
 split
 {
-	if (current.MapFile != old.MapFile && vars.MapFileNames.Contains(old.MapFile.ToLower()))
-		return true;
+	if (current.MapFile != old.MapFile) {
+		foreach (var s in vars.MapFileNames) {
+			if (s.Equals(old.MapFile, StringComparison.OrdinalIgnoreCase)) {
+				return true;
+			}
+		}
+	}
 	
 	var redQuestChanged = (current.RedQuests & vars.RedMask) != (old.RedQuests & vars.RedMask);
 	var purpleQuestChanged = (current.PurpleQuests & vars.PurpleMask) != (old.PurpleQuests & vars.PurpleMask);
